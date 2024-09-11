@@ -70,9 +70,9 @@
 </script>
 
 <footer>
-	<div class="mx-auto w-full max-w-screen-xl xl:pb-2">
+	<div class="mx-auto w-full max-w-screen-xl xl:pb-2" >
 		<div class="gap-4 p-4 px-8 py-16 sm:pb-16 md:flex md:justify-between">
-			<div class="mb-12 flex flex-col gap-4">
+			<div class="mb-12 flex flex-col gap-4 items-center">
 				<a href="https://animation-svelte.vercel.app" class="flex items-center gap-2">
 					<ARE_Logo style="width:10rem"/>
 				</a>

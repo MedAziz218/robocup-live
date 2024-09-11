@@ -53,10 +53,13 @@
 >
 	<!-- {#if innerWidth < 768} -->
 		<div class="container flex h-14 items-center justify-between">
-			<a class="text-md flex items-center" href="/"> 	<ARE_Logo style="width: 3rem"/>
-</a>
+			
+			
+			<ARE_Logo  style="width: 50px;height: 50px"/>
+			
 
 			<div class="ml-auto flex h-full items-center">
+
 				<LightSwitch class="mr-4"/>
 				<a class="mr-6 text-sm" href="/signin"> Log in </a>
 				<Button variant="default" class="mr-6 text-sm" href="/signup">Register</Button>

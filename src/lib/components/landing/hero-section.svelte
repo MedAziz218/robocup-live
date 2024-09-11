@@ -25,7 +25,7 @@
 		<a href="https://animation-svelte.vercel.app" class="underline underline-offset-2">Svelte Animations</a>. -->
 	</p>
 	<Button
-		class="animate-fade-in -translate-y-4 gap-1 rounded-lg text-white opacity-0 ease-in-out [--animation-delay:600ms] dark:text-black"
+		class="animate-fade-in -translate-y-4 gap-1 rounded-lgopacity-0 ease-in-out [--animation-delay:600ms] dark:text-black"
 	>
 		<span>Register Now</span>
 		<ArrowRightIcon
