@@ -73,7 +73,10 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
+	export const npm_package_dependencies_bits_ui: string;
 	export const npm_package_dependencies_clsx: string;
+	export const npm_package_dependencies_lucide_svelte: string;
+	export const npm_package_dependencies_mode_watcher: string;
 	export const npm_package_dependencies_tailwind_merge: string;
 	export const npm_package_dependencies_tailwind_variants: string;
 	export const npm_package_description: string;
@@ -225,7 +228,10 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
+		npm_package_dependencies_bits_ui: string;
 		npm_package_dependencies_clsx: string;
+		npm_package_dependencies_lucide_svelte: string;
+		npm_package_dependencies_mode_watcher: string;
 		npm_package_dependencies_tailwind_merge: string;
 		npm_package_dependencies_tailwind_variants: string;
 		npm_package_description: string;
