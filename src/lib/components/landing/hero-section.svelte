@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { ArrowRightIcon } from 'lucide-svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import { cn } from '$lib/utils';
+
 </script>
 
 <section id="hero" class="relative mx-auto mt-32 max-w-7xl px-6 text-center md:px-8">
@@ -25,7 +27,13 @@
 		<a href="https://animation-svelte.vercel.app" class="underline underline-offset-2">Svelte Animations</a>. -->
 	</p>
 	<Button
-		class="animate-fade-in -translate-y-4 gap-1 rounded-lgopacity-0 ease-in-out [--animation-delay:600ms] dark:text-black"
+	class={cn(
+		"animate-fade-in -translate-y-4 gap-1 rounded-lgopacity-0 ease-in-out [--animation-delay:600ms] dark:text-black mb-4",
+
+		'group ',
+		'transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2'
+
+	)}
 	>
 		<span>Register Now</span>
 		<ArrowRightIcon
