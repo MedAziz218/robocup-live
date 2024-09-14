@@ -53,10 +53,10 @@
 >
 	<!-- {#if innerWidth < 768} -->
 		<div class="container flex h-14 items-center justify-between">
-			
-			
-			<ARE_Logo  style="width: 50px;height: 50px"/>
-			
+
+
+			<ARE_Logo target="_blank" href="https://ensi.rnu.tn/Anniv40ENSI/Clubs/ARE/index.html"  style="width: 50px;height: 50px"/>
+
 
 			<div class="ml-auto flex h-full items-center">
 

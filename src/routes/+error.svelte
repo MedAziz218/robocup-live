@@ -25,11 +25,6 @@
 </div>
 
 <style>
-
-	html {
-		height: 100%;
-	}
-
 	.fof {
 		font-family: 'Lato', sans-serif;
 		color: #888;

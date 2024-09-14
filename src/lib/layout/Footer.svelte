@@ -1,130 +1,116 @@
-<script>
-	import DiscordSvg from '$lib/imgs/discord.svg';
-	import TwitterSvg from '$lib/imgs/x.svg';
+<script lang="ts">
+	import { Facebook, Instagram, Youtube, MapPin, Phone, Mail, Check } from 'lucide-svelte';
+	import { toast } from 'svelte-sonner';
 	import {ARE_Logo} from '$lib/components/custom'
+	// Easily editable constants for location and social links
+	const location = {
+		name: 'National School of Computer Science',
+		// street: '123 Event Street',
+		// city: 'City',
+		// state: 'State',
+		// zipCode: '12345',
+		// country: 'Country',
+		mapUrl: 'https://maps.app.goo.gl/dfXGVadATginpb8t6'
+	};
 
-	const footerNavs = [
-		{
-			label: 'Product',
-			items: [
-				{
-					href: '/',
-					name: 'Email Collection'
-				},
-				{
-					href: '/pricing',
-					name: 'Pricing'
-				},
-				{
-					href: '/faq',
-					name: 'FAQ'
-				}
-			]
-		},
-
-		{
-			label: 'Community',
-			items: [
-				{
-					href: '/',
-					name: 'Discord'
-				},
-				{
-					href: '/',
-					name: 'Twitter'
-				},
-				{
-					href: 'mailto:hello@chatcollect.com',
-					name: 'Email'
-				}
-			]
-		},
-		{
-			label: 'Legal',
-			items: [
-				{
-					href: '/terms',
-					name: 'Terms'
-				},
-
-				{
-					href: '/privacy',
-					name: 'Privacy'
-				}
-			]
-		}
+	const socialLinks = [
+		{ name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/association.robotique.ensi' },
+		{ name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com/association.robotique.ensi/' },
+		{ name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com/@associationrobotiqueensi6742' }
 	];
+	// Easily modifiable lists for phone numbers and emails
+	const phoneNumbers = ['99 640 054'];
 
-	const footerSocials = [
-		{
-			href: '',
-			name: 'Discord',
-			icon: DiscordSvg
-		},
-		{
-			href: '',
-			name: 'Twitter',
-			icon: TwitterSvg
-		}
-	];
+	const emails = ['Association.robotique@ensi-uma.tn'];
+
+	let copiedItem = '';
+	let timeout: number;
+	function copyToClipboard(text: string) {
+		navigator.clipboard.writeText(text).then(() => {
+			clearTimeout(timeout);
+			copiedItem = text;
+			toast.success('Copied to clipboard!');
+			timeout = setTimeout(() => {
+				copiedItem = '';
+				toast.dismiss();
+			}, 2000);
+		});
+	}
 </script>
 
-<footer>
-	<div class="mx-auto w-full max-w-screen-xl xl:pb-2" >
-		<div class="gap-4 p-4 px-8 py-16 sm:pb-16 md:flex md:justify-between">
-			<div class="mb-12 flex flex-col gap-4 items-center">
-				<a href="https://animation-svelte.vercel.app" class="flex items-center gap-2">
-					<ARE_Logo style="width:10rem"/>
-				</a>
-			</div>
-			<div class="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10">
-				{#each footerNavs as nav}
-					<div>
-						<h2
-							class="mb-6 text-sm font-medium uppercase tracking-tighter text-gray-900 dark:text-white"
-						>
-							{nav.label}
-						</h2>
-						<ul class="grid gap-2">
-							{#each nav.items as item}
-								<li>
-									<a
-										href={item.href}
-										class="cursor-pointer text-sm font-[450] text-gray-400 duration-200 hover:text-gray-200"
-									>
-										{item.name}
-									</a>
-								</li>
-							{/each}
-						</ul>
+<footer >
+	<div class="container mx-auto pt-8 px-4 border-t  border-gray-700">
+		<div class="flex flex-col items-center justify-between lg:flex-row lg:items-start">
+			<!-- <div class="mb-8 hidden sm:block lg:mb-0 lg:mr-8">
+				<ARE_Logo style="width: 200px;height: 200px" />
+			</div> -->
+			<div class="grid grid-cols-1 gap-12 text-center md:grid-cols-3 lg:flex-grow">
+				<div class="flex flex-col items-center space-y-4">
+					<h3 class="mb-2 text-xl font-semibold">Event Location</h3>
+					<p>{location.name}</p>
+					<a
+						href={location.mapUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="mt-2 inline-flex items-center text-blue-400 transition-colors duration-200 hover:text-blue-300"
+					>
+						<MapPin size={18} class="mr-2" />
+						View on Google Maps
+					</a>
+				</div>
+				<div class="flex flex-col items-center space-y-4">
+					<h3 class="mb-2 text-xl font-semibold">Contact Us</h3>
+					<div class="space-y-2">
+						{#each phoneNumbers as phoneNumber}
+							<button
+								on:click={() => copyToClipboard(phoneNumber)}
+								class="flex items-center justify-center transition-colors duration-200 hover:text-blue-400"
+							>
+								{#if copiedItem === phoneNumber}
+									<Check size={18} class="mr-2 text-green-500" />
+								{:else}
+									<Phone size={18} class="mr-2" />
+								{/if}
+								{phoneNumber}
+							</button>
+						{/each}
 					</div>
-				{/each}
+					<div class="space-y-2">
+						{#each emails as email}
+							<button
+								on:click={() => copyToClipboard(email)}
+								class="flex items-center justify-center transition-colors duration-200 hover:text-blue-400"
+							>
+								{#if copiedItem === email}
+									<Check size={18} class="mr-2 text-green-500" />
+								{:else}
+									<Mail size={18} class="mr-2" />
+								{/if}
+								{email}
+							</button>
+						{/each}
+					</div>
+				</div>
+				<div class="flex flex-col items-center space-y-4">
+					<h3 class="mb-2 text-xl font-semibold">Follow Us</h3>
+					<div class="flex space-x-6">
+						{#each socialLinks as { name, icon: Icon, url }}
+							<a
+								href={url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="transition-colors duration-200 hover:text-blue-400"
+							>
+								<Icon size={28} />
+								<span class="sr-only">{name}</span>
+							</a>
+						{/each}
+					</div>
+				</div>
 			</div>
 		</div>
-
-		<div
-			class="flex flex-col gap-2 rounded-md border-neutral-700/20 px-8 py-4 sm:flex sm:flex-row sm:items-center sm:justify-between"
-		>
-			<div class="flex items-center space-x-5 sm:mt-0 sm:justify-center">
-				{#each footerSocials as social}
-					<a
-						href={social.href}
-						class="fill-gray-500 text-gray-500 hover:fill-gray-900 hover:text-gray-900 dark:hover:fill-gray-600 dark:hover:text-gray-600"
-					>
-						<img src={social.icon} class="size-4" alt={social.name} />
-						<span class="sr-only">{social.name}</span>
-					</a>
-				{/each}
-			</div>
-			<span class="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
-				Copyright ©
-				{' '}
-				{new Date().getFullYear()}
-				{' '}
-				<a href="/" class="cursor-pointer">ARE</a>
-				. All Rights Reserved.
-			</span>
+		<div class="mt-12  border-gray-700 py-2 text-center">
+			<p>&copy; {new Date().getFullYear()} {location.name}. All rights reserved.</p>
 		</div>
 	</div>
-	<!-- Site Banner -->
 </footer>
