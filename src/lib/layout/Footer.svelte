@@ -42,7 +42,7 @@
 </script>
 
 <footer id="footer" >
-	<div class="container mx-auto pt-8 px-4 border-t  border-gray-700 " >
+	<div class="container mx-auto pt-8 px-4 mt-16 md:mt-32 border-t  border-gray-700 " >
 		<div class="flex flex-col items-center justify-between lg:flex-row lg:items-start">
 			<!-- <div class="mb-8 hidden sm:block lg:mb-0 lg:mr-8">
 				<ARE_Logo style="width: 200px;height: 200px" />

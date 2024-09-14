@@ -70,7 +70,7 @@
 		</div>
 	</div>
 
-	<div id="hero-video" class="relative ">
+	<div id="hero-video" class="relative md:mx-32 lg ">
 		<div
 			class="rounded-xl border border-white/10 bg-white bg-opacity-[0.01]
 			 before:absolute before:bottom-1/2 before:left-0 before:top-0 before:size-full before:opacity-0
