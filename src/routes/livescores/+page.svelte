@@ -1,1 +1,5 @@
-<h1>Hola amigos</h1>
+<script lang="ts">
+    export let message: string;
+</script>
+
+<h1>{message}</h1>

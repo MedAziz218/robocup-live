@@ -3,8 +3,11 @@
 	import { toast } from 'svelte-sonner';
 	import {ARE_Logo} from '$lib/components/custom'
 	// Easily editable constants for location and social links
-	const location = {
-		name: 'National School of Computer Science',
+	const Event = {
+		name: 'Robocup 7.0',
+		organizer:"Association Robotique ENSI",
+		location: 'National School of Computer Science',
+		
 		// street: '123 Event Street',
 		// city: 'City',
 		// state: 'State',
@@ -39,7 +42,7 @@
 </script>
 
 <footer >
-	<div class="container mx-auto pt-8 px-4 border-t  border-gray-700">
+	<div class="container mx-auto pt-8 px-4 border-t  border-gray-700 " >
 		<div class="flex flex-col items-center justify-between lg:flex-row lg:items-start">
 			<!-- <div class="mb-8 hidden sm:block lg:mb-0 lg:mr-8">
 				<ARE_Logo style="width: 200px;height: 200px" />
@@ -47,9 +50,9 @@
 			<div class="grid grid-cols-1 gap-12 text-center md:grid-cols-3 lg:flex-grow">
 				<div class="flex flex-col items-center space-y-4">
 					<h3 class="mb-2 text-xl font-semibold">Event Location</h3>
-					<p>{location.name}</p>
+					<p>{Event.location}</p>
 					<a
-						href={location.mapUrl}
+						href={Event.mapUrl}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="mt-2 inline-flex items-center text-blue-400 transition-colors duration-200 hover:text-blue-300"
@@ -109,8 +112,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="mt-12  border-gray-700 py-2 text-center">
-			<p>&copy; {new Date().getFullYear()} {location.name}. All rights reserved.</p>
+		<div class="mt-12  border-gray-700 py-2 text-center text-muted-foreground" >
+			<p>&copy; {new Date().getFullYear()} {Event.organizer}. All rights reserved.</p>
 		</div>
 	</div>
 </footer>

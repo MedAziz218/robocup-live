@@ -67,7 +67,8 @@ const config: Config = {
 				'fade-up': 'fade-up 1000ms var(--animation-delay, 0ms) ease forwards',
 				shimmer: 'shimmer 8s infinite',
 				marquee: 'marquee var(--duration) infinite linear',
-				'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+				'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+				shine: "shine 2s linear infinite",
 			},
 			keyframes: {
 				'accordion-down': {
@@ -119,7 +120,11 @@ const config: Config = {
 				'marquee-vertical': {
 					from: { transform: 'translateY(0)' },
 					to: { transform: 'translateY(calc(-100% - var(--gap)))' }
-				}
+				},
+				shine: {
+					from: { backgroundPosition: "0 0" },
+					to: { backgroundPosition: "-200% 0" },
+				  },
 			}
 		}
 	}

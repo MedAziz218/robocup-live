@@ -1,5 +1,8 @@
 {
 	"/(app)": [],
 	"/": [],
-	"/livescores": []
+	"/livescores": [
+		"src/routes/livescores/+page.server.ts"
+	],
+	"/livescores/countdown": []
 }

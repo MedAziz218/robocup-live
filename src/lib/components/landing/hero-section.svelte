@@ -26,10 +26,11 @@
 		Tailwind CSS, <a href="https://svelte.dev" class="underline underline-offset-2">Svelte</a>, and
 		<a href="https://animation-svelte.vercel.app" class="underline underline-offset-2">Svelte Animations</a>. -->
 	</p>
+	
 	<Button
 	class={cn(
 		"animate-fade-in -translate-y-4 gap-1 rounded-lgopacity-0 ease-in-out [--animation-delay:600ms] dark:text-black mb-4",
-
+		'animate-shine bg-[linear-gradient(110deg,#FBD12C,15%,#FFF740,25%,#FBD12C)] bg-[length:200%_100%] ',
 		'group ',
 		'transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2'
 
@@ -40,4 +41,5 @@
 			class="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1"
 		/>
 	</Button>
+
 </section>

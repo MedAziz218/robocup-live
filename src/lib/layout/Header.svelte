@@ -61,7 +61,7 @@
 			<div class="ml-auto flex h-full items-center">
 
 				<LightSwitch class="mr-4"/>
-				<a class="mr-6 text-sm" href="/signin"> </a>
+				<a class="mr-6 text-sm" href="/livescores">Live Scores</a>
 				<Button variant="default" class="mr-6 text-sm" href="/signup">Register</Button>
 			</div>
 			<button class="ml-6 md:hidden" use:toggleOverflowHidden>
