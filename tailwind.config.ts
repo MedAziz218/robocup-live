@@ -10,7 +10,7 @@ const config: Config = {
 			center: true,
 			padding: '2rem',
 			screens: {
-				
+
 				'2xl': '1400px'
 			}
 		},
@@ -69,6 +69,7 @@ const config: Config = {
 				marquee: 'marquee var(--duration) infinite linear',
 				'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
 				shine: "shine 2s linear infinite",
+
 			},
 			keyframes: {
 				'accordion-down': {

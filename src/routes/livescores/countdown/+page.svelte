@@ -50,8 +50,11 @@
           <p class="text-3xl font-bold text-center">{timeLeft}</p>
         </div>
         <p class="mt-6 text-sm text-muted-foreground">We'll display live scores here once the event begins.</p>
+        
         <Input  type="text" placeholder="Enter your email" class="w-full mt-4 bg-muted" />
-        <Button class="w-full mt-4" variant="default">Notify Me When Event Starts</Button>
+        <Button class="w-full mt-2" variant="default">Notify Me When Event Starts</Button>
+        <Button class="w-full mt-4" variant="outline" href="/">Back to Home page</Button>
+
       </CardContent>
     </Card>
   </div>

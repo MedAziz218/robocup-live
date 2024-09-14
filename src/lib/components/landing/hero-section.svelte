@@ -2,23 +2,35 @@
 	import { ArrowRightIcon } from 'lucide-svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { cn } from '$lib/utils';
+	import BorderBeam from '$lib/components/magic/borderbeam/BorderBeam.svelte';
 
+	import type { ObserverEventDetails } from 'svelte-inview';
+	import { inview } from 'svelte-inview';
+
+	import HeroDarkImg from '$lib/imgs/hero-dark.png';
+	import HeroLightImg from '$lib/imgs/hero-light.png';
+	import HeroVideoDialog from '../magic/HeroVideoDialog/HeroVideoDialog.svelte';
+	let inView = false;
+	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
+		// console.log(detail);
+		inView = detail.inView;
+	};
 </script>
 
-<section id="hero" class="relative mx-auto mt-32 max-w-7xl px-6 text-center md:px-8 ">
+<section id="hero" class="relative mx-auto mt-32 max-w-7xl px-6 text-center md:px-8">
 	<h1
-		class="animate-fade-in -translate-y-4 text-balance bg-gradient-to-br from-black from-30% to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] dark:from-white dark:to-white/40 sm:text-6xl md:text-7xl lg:text-8xl"
+		class="-translate-y-4 animate-fade-in text-balance bg-gradient-to-br from-black from-30% to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent opacity-0 [--animation-delay:200ms] dark:from-white dark:to-white/40 sm:text-6xl md:text-7xl lg:text-8xl"
 	>
-	 <span class="text-nowrap">
-		RoboCup
-		<span class="text-primary"> 7.0 </span>
-	 </span>
+		<span class="text-nowrap">
+			RoboCup
+			<span class="text-primary"> 7.0 </span>
+		</span>
 		<br class="hidden md:block" />
 		{' '}
 		Robots Unleashed
 	</h1>
 	<p
-		class="animate-fade-in mb-8 -translate-y-4 text-balance text-lg tracking-tight text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl"
+		class="mb-8 -translate-y-4 animate-fade-in text-balance text-lg tracking-tight text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl"
 	>
 		Gear up for an epic showdown of innovation, skill, and cutting-edge robotics at RoboCup 7.0!
 		<!-- <br class="hidden md:block" />
@@ -26,15 +38,14 @@
 		Tailwind CSS, <a href="https://svelte.dev" class="underline underline-offset-2">Svelte</a>, and
 		<a href="https://animation-svelte.vercel.app" class="underline underline-offset-2">Svelte Animations</a>. -->
 	</p>
-	
-	<Button
-	class={cn(
-		"animate-fade-in -translate-y-4 gap-1 rounded-lgopacity-0 ease-in-out [--animation-delay:600ms] dark:text-black mb-4",
-		'animate-shine bg-[linear-gradient(110deg,#FBD12C,15%,#FFF740,25%,#FBD12C)] bg-[length:200%_100%] ',
-		'group ',
-		'transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2'
 
-	)}
+	<Button
+		class={cn(
+			'rounded-lgopacity-0 mb-4 -translate-y-4 animate-fade-in gap-1 ease-in-out [--animation-delay:600ms] dark:text-black',
+			'animate-shine bg-[linear-gradient(110deg,#FBD12C,15%,#FFF740,25%,#FBD12C)] bg-[length:200%_100%] ',
+			'group ',
+			'transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2'
+		)}
 	>
 		<span>Register Now</span>
 		<ArrowRightIcon
@@ -42,4 +53,37 @@
 		/>
 	</Button>
 
+	<div
+		use:inview={{
+			unobserveOnEnter: true,
+			rootMargin: '-100px'
+		}}
+		on:inview_change={handleChange}
+		class="relative mt-16 md:mt-32 animate-fade-up"
+	>
+		<div
+			class="rounded-xl bg-white bg-opacity-[0.01]
+			 before:absolute before:bottom-1/2 before:left-0 before:top-0 before:size-full before:opacity-0
+			 before:[background-image:linear-gradient(to_bottom,var(--color-one),var(--color-one),transparent_40%)]
+			 before:[filter:blur(180px)] before:animate-image-glow"
+		>
+		</div>
+	</div>
+
+	<div id="hero-video" class="relative ">
+		<div
+			class="rounded-xl border border-white/10 bg-white bg-opacity-[0.01]
+			 before:absolute before:bottom-1/2 before:left-0 before:top-0 before:size-full before:opacity-0
+			 before:[background-image:linear-gradient(to_bottom,var(--color-one),var(--color-one),transparent_40%)]
+			 before:[filter:blur(180px)] before:animate-image-glow"
+		>
+			<BorderBeam />
+			<HeroVideoDialog
+				animationStyle="from-center"
+				videoSrc="https://www.youtube.com/watch?v=u_2VZjXJueg&t=128s"
+				thumbnailSrc="src/lib/imgs/robocup7.0_flyer.jpg"
+				thumbnailAlt="Hero Video"
+			/>
+		</div>
+	</div>
 </section>

@@ -11,6 +11,6 @@
     <enhanced:img src={ARE_Dark} class="hidden dark:flex" alt="ARE Logo" />
   </a>
 {:else}
-  <enhanced:img src={ARE_Light} class="dark:hidden" alt="ARE Logo" {...$$restProps} />
+  <enhanced:img src={ARE_Light} class="flex  dark:hidden" alt="ARE Logo" {...$$restProps} />
   <enhanced:img src={ARE_Dark} class="hidden dark:flex" alt="ARE Logo" {...$$restProps} />
 {/if}

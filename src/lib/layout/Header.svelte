@@ -3,46 +3,69 @@
 	import { cn } from '$lib/utils';
 	import { AlignJustify, XIcon } from 'lucide-svelte';
 	import { fly } from 'svelte/transition';
-	import {LightSwitch} from '$lib/components/custom';
-	import {ARE_Logo} from '$lib/components/custom'
+	import { LightSwitch } from '$lib/components/custom';
+	import { ARE_Logo } from '$lib/components/custom';
+	import { toggleMode } from 'mode-watcher';
 
 	const menuItem = [
 		{
 			id: 1,
-			label: 'Features',
-			href: '#'
+			label: 'Switch Theme',
+			href: '#',
+			onclick: () => {
+				toggleMode();
+			}
 		},
 		{
 			id: 2,
-			label: 'Pricing',
-			href: '#'
+			label: 'Live Scores',
+			href: '/livescores/countdown'
 		},
+
 		{
 			id: 3,
-			label: 'Careers',
-			href: '#'
+			label: 'Contact Us',
+			href: '#footer',
+			onclick: () => {
+				CloseHamburgerMenu();
+			}
 		},
 		{
 			id: 4,
-			label: 'Contact Us',
-			href: '#'
+			label: 'Close',
+			href: '#',
+			onclick: () => {
+				CloseHamburgerMenu()
+			}
 		}
 	];
 
 	let hamburgerMenuIsOpen = false;
-
-	function toggleOverflowHidden(node: HTMLElement) {
-		node.addEventListener('click', () => {
-			hamburgerMenuIsOpen = !hamburgerMenuIsOpen;
-			const html = document.querySelector('html');
-			if (html) {
-				if (hamburgerMenuIsOpen) {
-					html.classList.add('overflow-hidden');
-				} else {
-					html.classList.remove('overflow-hidden');
-				}
+	function CloseHamburgerMenu() {
+		hamburgerMenuIsOpen = false;
+		const html = document.querySelector('html');
+		if (html) {
+			if (hamburgerMenuIsOpen) {
+				html.classList.add('overflow-hidden');
+			} else {
+				html.classList.remove('overflow-hidden');
 			}
-		});
+		}
+	}
+
+	function ToggleHamburgerMenu() {
+		hamburgerMenuIsOpen = !hamburgerMenuIsOpen;
+		const html = document.querySelector('html');
+		if (html) {
+			if (hamburgerMenuIsOpen) {
+				html.classList.add('overflow-hidden');
+			} else {
+				html.classList.remove('overflow-hidden');
+			}
+		}
+	}
+	function toggleOverflowHidden(node: HTMLElement) {
+		node.addEventListener('click', ToggleHamburgerMenu);
 	}
 	let innerWidth = 0;
 </script>
@@ -52,27 +75,29 @@
 	class="fixed left-0 top-0 z-50 w-full -translate-y-4 animate-fade-in border-b opacity-0 backdrop-blur-md"
 >
 	<!-- {#if innerWidth < 768} -->
-		<div class="container flex h-14 items-center justify-between">
+	<div class="container flex h-14 items-center justify-between">
+		<ARE_Logo
+			target="_blank"
+			href="https://ensi.rnu.tn/Anniv40ENSI/Clubs/ARE/index.html"
+			style="width: 50px;height: 50px"
+		/>
 
-
-			<ARE_Logo target="_blank" href="https://ensi.rnu.tn/Anniv40ENSI/Clubs/ARE/index.html"  style="width: 50px;height: 50px"/>
-
-
-			<div class="ml-auto flex h-full items-center">
-
-				<LightSwitch class="mr-4"/>
+		<div class="ml-auto flex h-full items-center">
+			<div class="hidden h-full items-center sm:flex">
+				<LightSwitch class="mr-4" />
 				<a class="mr-6 text-sm" href="/livescores">Live Scores</a>
-				<Button variant="default" class="mr-6 text-sm" href="/signup">Register</Button>
 			</div>
-			<button class="ml-6 md:hidden" use:toggleOverflowHidden>
-				<span class="sr-only">Toggle menu</span>
-				{#if hamburgerMenuIsOpen}
-					<XIcon  strokeWidth={1.4} class='text-gray-300'/>
-				{:else}
-					<AlignJustify strokeWidth={1.4} class='text-gray-300' />
-				{/if}
-			</button>
+			<Button variant="default" class="text-sm" href="/signup">Register</Button>
 		</div>
+		<button class="ml-6 md:hidden" use:toggleOverflowHidden>
+			<span class="sr-only">Toggle menu</span>
+			{#if hamburgerMenuIsOpen}
+				<XIcon strokeWidth={1.4} class="text-gray-300" />
+			{:else}
+				<AlignJustify strokeWidth={1.4} class="text-gray-300" />
+			{/if}
+		</button>
+	</div>
 	<!-- {/if} -->
 </header>
 
@@ -94,9 +119,9 @@
 			<button class="md:hidden" use:toggleOverflowHidden>
 				<span class="sr-only">Toggle menu</span>
 				{#if hamburgerMenuIsOpen}
-					<XIcon strokeWidth={1.4} class='text-gray-300'/>
+					<XIcon strokeWidth={1.4} class="text-gray-300" />
 				{:else}
-					<AlignJustify strokeWidth={1.4} class='text-gray-300'/>
+					<AlignJustify strokeWidth={1.4} class="text-gray-300" />
 				{/if}
 			</button>
 		</div>
@@ -111,6 +136,7 @@
 							? '[&_a]:translate-y-0'
 							: ''}"
 						href={item.href}
+						on:click={item.onclick ? item.onclick : () => {}}
 					>
 						{item.label}
 					</a>
