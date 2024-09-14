@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/enhanced-img": "^0.3.7",
 		"bits-ui": "^0.21.13",
 		"clsx": "^2.1.1",
 		"lucide-svelte": "^0.439.0",

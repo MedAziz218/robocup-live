@@ -1,12 +1,7 @@
 <script lang="ts">
-
-    import  ARE_Dark from "$lib/imgs/ARE-Logo-DarkMode.png"
-    import  ARE_Light from "$lib/imgs/ARE-Logo-LightMode.png"
-    import { mode } from "mode-watcher";
+	import ARE_Dark from '$lib/imgs/ARE-Logo-DarkMode.png?enhanced';
+	import ARE_Light from '$lib/imgs/ARE-Logo-LightMode.png?enhanced';
 </script>
 
-{#if $mode === "dark"}
-<img src={ARE_Dark} alt="ARE Logo" {...$$restProps}/>
-{:else}
-<img src={ARE_Light} alt="ARE Logo" {...$$restProps}/>
-{/if}
+<enhanced:img src={ARE_Light} class="dark:hidden" alt="ARE Logo" {...$$restProps} />
+<enhanced:img src={ARE_Dark} class="hidden dark:flex" alt="ARE Logo" {...$$restProps} />
