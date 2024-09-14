@@ -80,8 +80,8 @@
 			<BorderBeam />
 			<HeroVideoDialog
 				animationStyle="from-center"
-				videoSrc="https://www.youtube.com/watch?v=u_2VZjXJueg&t=128s"
-				thumbnailSrc="src/lib/imgs/robocup7.0_flyer.jpg"
+				videoSrc="https://www.youtube.com/watch?v=SbYXkOAoZpI"
+				thumbnailSrc="src/lib/imgs/robocup7.0_flyer.webp"
 				thumbnailAlt="Hero Video"
 			/>
 		</div>
