@@ -372,7 +372,7 @@
 	</Form.Field>
 	<div class="flex justify-between">
 		<Form.Button on:click={() => saveForm()} disabled={$submitting}>Envoyer</Form.Button>
-		<Button on:click={() => form.reset()}>Effacer le formulaire</Button>
+		<Button variant="ghost" on:click={() => form.reset()}>Effacer le formulaire</Button>
 	</div>
 </form>
 
