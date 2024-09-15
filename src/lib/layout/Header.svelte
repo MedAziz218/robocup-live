@@ -19,7 +19,10 @@
 		{
 			id: 2,
 			label: 'Live Scores',
-			href: '/livescores/countdown'
+			href: '/livescores/countdown',
+			onclick: () => {
+				CloseHamburgerMenu();
+			}
 		},
 
 		{

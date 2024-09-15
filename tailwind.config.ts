@@ -62,7 +62,7 @@ const config: Config = {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
-				'image-glow': 'image-glow 4100ms 600ms ease-out forwards',
+				'image-glow': 'image-glow 2000ms 600ms ease-out forwards',
 				'fade-in': 'fade-in 1000ms var(--animation-delay, 0ms) ease forwards',
 				'fade-up': 'fade-up 1000ms var(--animation-delay, 0ms) ease forwards',
 				shimmer: 'shimmer 8s infinite',

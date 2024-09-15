@@ -7,7 +7,7 @@
 		name: 'Robocup 7.0',
 		organizer:"Association Robotique ENSI",
 		location: 'National School of Computer Science',
-		
+
 		// street: '123 Event Street',
 		// city: 'City',
 		// state: 'State',

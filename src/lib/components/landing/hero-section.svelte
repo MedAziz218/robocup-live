@@ -7,13 +7,15 @@
 	import type { ObserverEventDetails } from 'svelte-inview';
 	import { inview } from 'svelte-inview';
 
-	import HeroDarkImg from '$lib/imgs/hero-dark.png';
-	import HeroLightImg from '$lib/imgs/hero-light.png';
+
 	import HeroVideoDialog from '../magic/HeroVideoDialog/HeroVideoDialog.svelte';
+	export let hero_video_link="https://www.youtube.com/watch?v=SbYXkOAoZpI"
+
 	let inView = false;
 	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
-		// console.log(detail);
+		console.log(detail);
 		inView = detail.inView;
+		
 	};
 </script>
 
@@ -56,31 +58,25 @@
 	<div
 		use:inview={{
 			unobserveOnEnter: true,
-			rootMargin: '-100px'
+			rootMargin: '-1px'
 		}}
 		on:inview_change={handleChange}
-		class="relative mt-16 md:mt-32 animate-fade-up"
+		class="relative mt-16 md:mt-32 "
 	>
-		<div
-			class="rounded-xl bg-white bg-opacity-[0.01]
-			 before:absolute before:bottom-1/2 before:left-0 before:top-0 before:size-full before:opacity-0
-			 before:[background-image:linear-gradient(to_bottom,var(--color-one),var(--color-one),transparent_40%)]
-			 before:[filter:blur(180px)] before:animate-image-glow"
-		>
-		</div>
+
 	</div>
 
-	<div id="hero-video" class="relative md:mx-32 lg ">
+	<div id="hero-video" class="relative  ">
 		<div
 			class="rounded-xl border border-white/10 bg-white bg-opacity-[0.01]
 			 before:absolute before:bottom-1/2 before:left-0 before:top-0 before:size-full before:opacity-0
 			 before:[background-image:linear-gradient(to_bottom,var(--color-one),var(--color-one),transparent_40%)]
-			 before:[filter:blur(180px)] before:animate-image-glow"
+			 before:[filter:blur(180px)] {inView?'before:animate-image-glow':''} "
 		>
 			<BorderBeam />
 			<HeroVideoDialog
 				animationStyle="from-center"
-				videoSrc="https://www.youtube.com/watch?v=SbYXkOAoZpI"
+				videoSrc={hero_video_link}
 				thumbnailSrc="src/lib/imgs/robocup7.0_flyer.webp"
 				thumbnailAlt="Hero Video"
 			/>
