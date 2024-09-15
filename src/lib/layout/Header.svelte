@@ -90,7 +90,7 @@
 				<LightSwitch class="mr-4" />
 				<a class="mr-6 text-sm" href="/livescores">Live Scores</a>
 			</div>
-			<Button variant="default" class="text-sm" href="/signup">Register</Button>
+			<Button variant="default" class="text-sm" href="/register">Register</Button>
 		</div>
 		<button class="ml-6 md:hidden" use:toggleOverflowHidden>
 			<span class="sr-only">Toggle menu</span>
@@ -117,7 +117,7 @@
 >
 	{#if hamburgerMenuIsOpen === true}
 		<div class="container flex h-14 items-center justify-between">
-			<a class="text-md flex items-center" href="/"> ARE</a>
+			<a class="text-md flex items-center" href="#"> ARE</a>
 
 			<button class="md:hidden" use:toggleOverflowHidden>
 				<span class="sr-only">Toggle menu</span>

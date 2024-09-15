@@ -57,7 +57,7 @@
 		{#each challenges as challenge}
 			<Card
 				class={cn(
-          'flex flex-col',
+					'flex flex-col',
 					'max-w: overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl',
 					'transform-gpu  ring-offset-transparent transition-all duration-300 ease-out hover:ring-2 hover:ring-primary '
 				)}
@@ -72,7 +72,7 @@
 						)}
 					/>
 				</CardHeader>
-				<CardContent class="p-4 flex-grow">
+				<CardContent class="flex-grow p-4">
 					<CardTitle class="mb-2 text-xl">{challenge.name}</CardTitle>
 					<p class="mb-4 text-sm text-muted-foreground">{challenge.description}</p>
 				</CardContent>
@@ -86,21 +86,20 @@
 	</div>
 </div>
 
-
 <style>
-  /* Ensure consistent card heights within rows */
-  .grid {
-    display: grid;
-    grid-auto-rows: 1fr;
-  }
+	/* Ensure consistent card heights within rows */
+	.grid {
+		display: grid;
+		grid-auto-rows: 1fr;
+	}
 
-  /* Additional styles for flex layout within cards */
-  :global(.card) {
-    display: flex;
-    flex-direction: column;
-  }
+	/* Additional styles for flex layout within cards */
+	:global(.card) {
+		display: flex;
+		flex-direction: column;
+	}
 
-  :global(.card-content) {
-    flex-grow: 1;
-  }
+	:global(.card-content) {
+		flex-grow: 1;
+	}
 </style>

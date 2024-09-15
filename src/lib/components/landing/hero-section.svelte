@@ -42,6 +42,7 @@
 	</p>
 
 	<Button
+		href="/register"
 		class={cn(
 			'rounded-lgopacity-0 mb-4 -translate-y-4 animate-fade-in gap-1 ease-in-out [--animation-delay:600ms] dark:text-black',
 			'animate-shine bg-[linear-gradient(110deg,#FBD12C,15%,#FFF740,25%,#FBD12C)] bg-[length:200%_100%] ',

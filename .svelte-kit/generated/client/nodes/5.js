@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/livescores/countdown/+page.svelte";
+export { default as component } from "../../../../src/routes/(app)/register/+page.svelte";
