@@ -13,12 +13,12 @@
 		<p class="text-sm text-muted-foreground"></p>
 
         <div class="">
-            <h1 class="text-xl font-bold text-blue-400 mb-2">RoboCup ENSI</h1>
+            <h1 class="font-bold text-blue-400 mb-2">RoboCup ENSI</h1>
             <p class="text-sm mb-2">« RoboCup ENSI » est un événement annuel organisé par l'Association Robotique ENSI. La sixième édition aura lieu le 13 octobre 2024 au sein de l’École Nationale des Sciences de l’Informatique sous le thème :</p>
-            <h2 class="text-lg font-semibold text-blue-300 mb-2">CHEMICAL CHAOS</h2>
+            <h2 class=" font-semibold text-blue-300 mb-2">CHEMICAL CHAOS</h2>
 
             <p class="text-sm mb-2">Ce formulaire est dédié aux jeunes roboticiens de moins de 18 ans qui veulent s'inscrire au concours</p>
-            <h2 class="text-lg font-semibold text-blue-300 mb-2">WAVE WARDENS - Robot Téléguidé</h2>
+            <h2 class=" font-semibold text-blue-300 mb-2">WAVE WARDENS - Robot Téléguidé</h2>
 
             <!-- <div class="bg-gray-800 border-l-4 border-blue-500 p-4 rounded-lg mb-4 text-white dark:test-black"> -->
             <div class="bg-gray-200 border-l-4 border-teal-500 p-4 rounded-lg mb-4 dark:bg-gray-800 dark:border-teal-300">
