@@ -130,6 +130,7 @@
 			saveForm();
 		} catch (e) {}
 	});
+
 </script>
 
 <form method="POST" class="space-y-8" use:enhance id="profile-form">
@@ -371,8 +372,9 @@
 		<Form.FieldErrors />
 	</Form.Field>
 	<div class="flex justify-between">
-		<Form.Button on:click={() => saveForm()} disabled={$submitting}>Envoyer</Form.Button>
+		<Form.Button on:click={() =>{ saveForm()}} disabled={$submitting}>Envoyer</Form.Button>
 		<Button variant="ghost" on:click={() => form.reset()}>Effacer le formulaire</Button>
+
 	</div>
 </form>
 
