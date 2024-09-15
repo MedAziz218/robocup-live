@@ -23,9 +23,9 @@ export const dictionary = {
 		"/livescores/countdown": [11],
 		"/(app)/register": [5,[3]],
 		"/(app)/register/all-terrain": [~6,[3]],
-		"/(app)/register/autonomous": [7,[3]],
-		"/(app)/register/junior": [8,[3]],
-		"/(app)/register/linefollower": [9,[3]]
+		"/(app)/register/autonomous": [~7,[3]],
+		"/(app)/register/junior": [~8,[3]],
+		"/(app)/register/linefollower": [~9,[3]]
 	};
 
 export const hooks = {

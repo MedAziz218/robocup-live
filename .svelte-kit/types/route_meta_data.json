@@ -9,7 +9,13 @@
 	"/(app)/register/all-terrain": [
 		"src/routes/(app)/register/all-terrain/+page.server.ts"
 	],
-	"/(app)/register/autonomous": [],
-	"/(app)/register/junior": [],
-	"/(app)/register/linefollower": []
+	"/(app)/register/autonomous": [
+		"src/routes/(app)/register/autonomous/+page.server.ts"
+	],
+	"/(app)/register/junior": [
+		"src/routes/(app)/register/junior/+page.server.ts"
+	],
+	"/(app)/register/linefollower": [
+		"src/routes/(app)/register/linefollower/+page.server.ts"
+	]
 }
