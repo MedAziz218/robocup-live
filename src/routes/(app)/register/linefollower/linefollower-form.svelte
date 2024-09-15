@@ -13,7 +13,7 @@
 			.min(1, required_error_message)
 			.min(2, too_short_error_message)
 			.max(30, too_long_error_message),
-		teamSize: z.enum(['1', '2', '3']),
+		teamSize: z.enum(['1', '2', '3']).default('3'),
 		teamLeaderName: z
 			.string()
 			.min(1, required_error_message)
@@ -75,13 +75,20 @@
 	import { RadioGroup, RadioGroupItem } from '$lib/components/ui/radio-group';
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
+	import { InfinityIcon } from 'lucide-svelte';
+	import Alert from '$lib/components/ui/alert/alert.svelte';
 	export let data: SuperValidated<Infer<LineFollowerFormSchema>>;
 	export let themeColor = 'bg-red-500';
 	const form = superForm(data, {
-		validators: zodClient(lineFollowerFormSchema)
+		validators: zodClient(lineFollowerFormSchema),
+		onResult: (e) => {
+			console.log('got result', e);
+		},
+		invalidateAll: false,
+		resetForm: false
 	});
 
-	let { form: formData, enhance } = form;
+	let { form: formData, submitting, enhance } = form;
 	const isRequired = (field: string) => {
 		const requiredFields = [
 			'robotName',
@@ -97,36 +104,31 @@
 	};
 	// Save form to localStorage
 	const saveForm = () => {
-		localStorage.setItem('linefollower-form', JSON.stringify($formData));
+		localStorage.setItem('linefollower-form', JSON.stringify(form.capture()));
 	};
 
 	// Load form from localStorage
 	const loadForm = () => {
 		const savedForm = localStorage.getItem('linefollower-form');
 		if (savedForm) {
-			$formData = JSON.parse(savedForm);
+			form.restore(JSON.parse(savedForm));
 		}
 		console.log(savedForm);
 		console.log($formData);
 	};
 	const clearForm = () => {
-		$formData = {
-			robotName: '',
-			teamSize: '1',
-			teamLeaderName: '',
-			teamLeaderPhoneNumber: '',
-			clubName: '',
-			establishmentName: '',
-			otherPhoneNumber: '',
-			teamLeaderEmail: ''
-		};
+		form.reset();
 		localStorage.removeItem('linefollower-form');
 	};
 	onMount(() => {
-		loadForm();
+		try {
+			loadForm();
+		} catch (e) {}
 	});
 	onDestroy(() => {
-		saveForm();
+		try {
+			saveForm();
+		} catch (e) {}
 	});
 </script>
 
@@ -152,13 +154,15 @@
 				Le nombre des membres de l'équipe:
 				{#if isRequired('teamSize')}<span class="ml-2 text-red-500">*</span>{/if}
 			</Form.Label>
-			<!-- <Input
+			<Input
+				class="hidden"
+				type="number"
 				placeholder="le nombre des membres de l'équipe"
 				{...attrs}
 				bind:value={$formData.teamSize}
-			/> -->
+			/>
 			<RadioGroup bind:value={$formData.teamSize}>
-				{#each lineFollowerFormSchema.shape.teamSize.options || [] as option}
+				{#each ['1', '2', '3'] as option}
 					<div class="flex items-center space-x-2">
 						<RadioGroupItem value={option} id={`teamSize-${option}`} />
 						<Label for={`teamSize-${option}`}>{option}</Label>
@@ -367,12 +371,8 @@
 		<Form.FieldErrors />
 	</Form.Field>
 	<div class="flex justify-between">
-		<Form.Button
-			on:click={() => {
-				saveForm();
-			}}>Envoyer</Form.Button
-		>
-		<Button variant="ghost" on:click={clearForm}>Effacer le formulaire</Button>
+		<Form.Button on:click={() => saveForm()} disabled={$submitting}>Envoyer</Form.Button>
+		<Button on:click={() => form.reset()}>Effacer le formulaire</Button>
 	</div>
 </form>
 
