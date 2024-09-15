@@ -15,7 +15,7 @@
 	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
 		console.log(detail);
 		inView = detail.inView;
-		
+
 	};
 </script>
 
