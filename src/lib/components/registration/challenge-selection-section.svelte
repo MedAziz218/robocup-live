@@ -13,7 +13,7 @@
 		id: 2,
 		name: 'Line Follower',
 		description: 'Race the track with speed and accuracy. Follow the line, finish first.',
-		href: '/register/line-follower'
+		href: '/register/linefollower'
 	},
 	{
 		id: 3,
@@ -43,7 +43,7 @@
 	}
 </script>
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-4">
 	<h1 class="mb-4 text-center text-3xl font-bold">Robocup Registration</h1>
 	<p class="mb-8 text-center text-muted-foreground">
 		Choose one of the following challenges to register for our exciting event!
@@ -58,7 +58,8 @@
 				<Card
 					class={cn(
 						'w-full cursor-pointer transition-all duration-300 hover:shadow-lg hover:ring-2 hover:ring-ring hover:ring-offset-2',
-						'transform-gpu  ring-offset-transparent transition-all duration-300 ease-out hover:ring-2 hover:ring-primary '
+						'transform-gpu  ring-offset-transparent transition-all duration-300 ease-out hover:ring-2 hover:ring-primary ',
+						'bg-[#E1DBBD] dark:bg-[#1D1C18]'
 					)}
 				>
 					<div class="p-6">
@@ -72,7 +73,7 @@
 			</a>
 		{/each}
 	</div>
-	<p class="mt-8 text-center text-muted-foreground">
+	<p class="my-8 text-center text-muted-foreground">
 		Feel free to register for multiple challenges and showcase your diverse skills!
 	</p>
 </div>

@@ -5,5 +5,11 @@
 		"src/routes/livescores/+page.server.ts"
 	],
 	"/livescores/countdown": [],
-	"/(app)/register": []
+	"/(app)/register": [],
+	"/(app)/register/all-terrain": [
+		"src/routes/(app)/register/all-terrain/+page.server.ts"
+	],
+	"/(app)/register/autonomous": [],
+	"/(app)/register/junior": [],
+	"/(app)/register/linefollower": []
 }

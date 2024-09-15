@@ -8,16 +8,24 @@ export const nodes = [
 	() => import('./nodes/4'),
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
-	() => import('./nodes/7')
+	() => import('./nodes/7'),
+	() => import('./nodes/8'),
+	() => import('./nodes/9'),
+	() => import('./nodes/10'),
+	() => import('./nodes/11')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/(app)": [4,[2]],
-		"/livescores": [~6],
-		"/livescores/countdown": [7],
-		"/(app)/register": [5,[3]]
+		"/livescores": [~10],
+		"/livescores/countdown": [11],
+		"/(app)/register": [5,[3]],
+		"/(app)/register/all-terrain": [~6,[3]],
+		"/(app)/register/autonomous": [7,[3]],
+		"/(app)/register/junior": [8,[3]],
+		"/(app)/register/linefollower": [9,[3]]
 	};
 
 export const hooks = {
