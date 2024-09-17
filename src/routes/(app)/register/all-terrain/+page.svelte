@@ -31,7 +31,7 @@
         </div>
 	</div>
 	<Separator />
-	<AllTerrainForm data={data.form} />
+	<AllTerrainForm data={data.form} themeColor="bg-red-600" />
 </div>
 
 <style>

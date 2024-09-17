@@ -28,7 +28,7 @@
         </div>
 	</div>
 	<Separator />
-	<AutonomousForm data={data.form} />
+	<AutonomousForm data={data.form}  themeColor="bg-blue-600"/>
 </div>
 
 <style>

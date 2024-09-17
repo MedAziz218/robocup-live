@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
-import { lineFollowerFormSchema } from './formSchema';
+import { LineFollowerFormSchema as FormSchema } from './formSchema';
 import { Linefollower_google_Form_Link } from '$env/static/private';
 
 // types
@@ -10,14 +10,14 @@ import { type Actions, fail } from '@sveltejs/kit';
 
 export const load = async () => {
 	return {
-		form: await superValidate(zod(lineFollowerFormSchema)),
+		form: await superValidate(zod(FormSchema)),
 		backUrl: '/register'
 	};
 };
 
 export const actions = {
 	default: async (event: import('./$types').RequestEvent) => {
-		const form = await superValidate(event, zod(lineFollowerFormSchema));
+		const form = await superValidate(event, zod(FormSchema));
 
 		if (!form.valid) {
 			return fail(400, {

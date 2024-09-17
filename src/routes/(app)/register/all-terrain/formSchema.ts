@@ -6,7 +6,7 @@ const too_long_error_message = 'la valeur entree est trop longue';
 const too_short_error_message = 'la valeur entree est trop courte';
 const invalid_phone_number_error_message = 'ce numero de telephone est invalide';
 const invalid_email_error_message = 'ce email est invalide';
-export const LineFollowerFormSchema = z.object({
+export const AllterrainFormSchema = z.object({
 	robotName: z
 		.string()
 		.min(1, required_error_message)
@@ -56,4 +56,4 @@ export const LineFollowerFormSchema = z.object({
 		.max(50, too_long_error_message)
 });
 
-export type LineFollowerFormSchemaType = typeof LineFollowerFormSchema;
+export type AllterrainFormSchemaType = typeof AllterrainFormSchema;

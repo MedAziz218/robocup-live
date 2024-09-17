@@ -18,10 +18,11 @@
 	import Alert from '$lib/components/ui/alert/alert.svelte';
 	import { goto } from '$app/navigation';
 	import { redirect } from '@sveltejs/kit';
-	import { lineFollowerFormSchema, type LineFollowerFormSchema } from './formSchema';
+	import { LineFollowerFormSchema as FormSchema} from './formSchema';
+	import type {  LineFollowerFormSchemaType as FormSchemaType } from './formSchema';
 	import { page } from '$app/stores';
 
-	export let data: SuperValidated<Infer<LineFollowerFormSchema>>;
+	export let data: SuperValidated<Infer<FormSchemaType>>;
 	export let themeColor = 'bg-red-500';
 	let clearFormOnDestroy = false;
 	const setClearFormOnDestroy = (v: boolean) => {
@@ -32,7 +33,7 @@
 	};
 	const _form_id = 'linefollower-form';
 	const form = superForm(data, {
-		validators: zodClient(lineFollowerFormSchema),
+		validators: zodClient(FormSchema),
 		multipleSubmits: 'prevent',
 		clearOnSubmit: 'errors',
 		applyAction: false,
@@ -383,6 +384,6 @@
 	</div>
 </form>
 
-{#if browser}
+<!-- {#if browser}
 	<SuperDebug data={$formData} />
-{/if}
+{/if} -->

@@ -27,6 +27,9 @@
  */
 declare module '$env/static/private' {
 	export const Linefollower_google_Form_Link: string;
+	export const Junior_google_Form_Link: string;
+	export const Autonomous_google_Form_Link: string;
+	export const Allterrain_google_Form_Link: string;
 	export const ALLUSERSPROFILE: string;
 	export const ANDROID_HOME: string;
 	export const APPDATA: string;
@@ -191,6 +194,9 @@ declare module '$env/static/public' {
 declare module '$env/dynamic/private' {
 	export const env: {
 		Linefollower_google_Form_Link: string;
+		Junior_google_Form_Link: string;
+		Autonomous_google_Form_Link: string;
+		Allterrain_google_Form_Link: string;
 		ALLUSERSPROFILE: string;
 		ANDROID_HOME: string;
 		APPDATA: string;

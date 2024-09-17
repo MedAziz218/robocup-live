@@ -35,7 +35,7 @@
         </div>
 	</div>
 	<Separator />
-	<JuniorForm data={data.form} />
+	<JuniorForm data={data.form}  themeColor="bg-blue-400"/>
 </div>
 
 <style>

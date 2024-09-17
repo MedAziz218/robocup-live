@@ -22,7 +22,7 @@
 		<ChevronLeftIcon class="mr-2 size-4" />
 		Back
 	</Button>
-	<div class="w-full">
+	<div class="w-full mb-8">
 		<slot></slot>
 	</div>
 </div>
