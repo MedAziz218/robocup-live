@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
+	import { Home } from 'lucide-svelte';
 </script>
 
 <div
@@ -18,6 +19,8 @@
 				href="/"
 				class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
 			>
+				<Home class="mr-2 h-4 w-4" />
+
 				Go to Homepage
 			</Button>
 		</div>

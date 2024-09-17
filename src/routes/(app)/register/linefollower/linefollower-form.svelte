@@ -1,65 +1,3 @@
-<script lang="ts" context="module">
-	import { z } from 'zod';
-	const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])*$|^$/);
-
-	const required_error_message = 'ce champ est obligatoire';
-	const too_long_error_message = 'la valeur entree est trop longue';
-	const too_short_error_message = 'la valeur entree est trop courte';
-	const invalid_phone_number_error_message = 'ce numero de telephone est invalide';
-	const invalid_email_error_message = 'ce email est invalide';
-	export const lineFollowerFormSchema = z.object({
-		robotName: z
-			.string()
-			.min(1, required_error_message)
-			.min(2, too_short_error_message)
-			.max(30, too_long_error_message),
-		teamSize: z.enum(['1', '2', '3']).default('3'),
-		teamLeaderName: z
-			.string()
-			.min(1, required_error_message)
-			.min(2, too_short_error_message)
-			.max(50, too_long_error_message),
-		teamLeaderPhoneNumber: z
-			.string()
-			.min(1, required_error_message)
-			.regex(phoneRegex, invalid_phone_number_error_message),
-		otherPhoneNumber: z
-			.string()
-			.min(1, required_error_message)
-			.regex(phoneRegex, invalid_phone_number_error_message),
-		teamLeaderEmail: z.string().min(1, required_error_message).email(invalid_email_error_message),
-
-		secondTeamMemberName: z.string().min(0).max(50, too_long_error_message).optional(),
-		secondTeamMemberPhoneNumber: z
-			.string()
-			.min(0)
-			.regex(phoneRegex, invalid_phone_number_error_message)
-			.optional(),
-		secondTeamMemberEmail: z.string().min(0).email(invalid_email_error_message).optional(),
-
-		thirdTeamMemberName: z.string().min(0).max(50, too_long_error_message).optional(),
-		thirdTeamMemberPhoneNumber: z
-			.string()
-			.min(0)
-			.regex(phoneRegex, invalid_phone_number_error_message)
-			.optional(),
-		thirdTeamMemberEmail: z.string().min(0).email(invalid_email_error_message).optional(),
-
-		establishmentName: z
-			.string()
-			.min(1, required_error_message)
-			.min(2, too_short_error_message)
-			.max(50, too_long_error_message),
-		clubName: z
-			.string()
-			.min(1, required_error_message)
-			.min(2, too_short_error_message)
-			.max(50, too_long_error_message)
-	});
-
-	export type LineFollowerFormSchema = typeof lineFollowerFormSchema;
-</script>
-
 <script lang="ts">
 	import { type Infer, type SuperValidated, superForm } from 'sveltekit-superforms';
 	import SuperDebug from 'sveltekit-superforms';
@@ -67,6 +5,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import * as Form from '$lib/components/ui/form/index.js';
 	import * as Select from '$lib/components/ui/select/index.js';
+	import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Textarea } from '$lib/components/ui/textarea/index.js';
@@ -77,18 +16,72 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { InfinityIcon } from 'lucide-svelte';
 	import Alert from '$lib/components/ui/alert/alert.svelte';
+	import { goto } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
+	import { lineFollowerFormSchema, type LineFollowerFormSchema } from './formSchema';
+	import { page } from '$app/stores';
+
 	export let data: SuperValidated<Infer<LineFollowerFormSchema>>;
 	export let themeColor = 'bg-red-500';
+	let clearFormOnDestroy = false;
+	const setClearFormOnDestroy = (v: boolean) => {
+		clearFormOnDestroy = v;
+	};
+	const getClearFormOnDestroy = () => {
+		return clearFormOnDestroy;
+	};
+	const _form_id = 'linefollower-form';
 	const form = superForm(data, {
 		validators: zodClient(lineFollowerFormSchema),
-		onResult: (e) => {
-			console.log('got result', e);
+		multipleSubmits: 'prevent',
+		clearOnSubmit: 'errors',
+		applyAction: false,
+		autoFocusOnError: true,
+		onUpdate: ({ form ,result }) => {
+			console.log('type: ',result.type,'status: ',result.status);
+			if (result.type=="success" && result.data.googleFormSuccess) {
+				const robotName = form.data.robotName;
+				const link = `/register/success?robotName=${encodeURIComponent(robotName)}`;
+				setClearFormOnDestroy(true);
+				clearForm();
+				goto(link);
+				console.log('goto link', link);
+			}else if (result.type=="failure" && form.valid && !result.data.googleFormSuccess) {
+				// goto('/register/failed');
+				// console.log(result.type)
+				const stat = result.status
+				const link = `/register/failed?status=${encodeURIComponent(stat)}`;
+				saveForm();
+				goto(link);
+				console.log('faileddddddddddddd')
+
+			}
+
 		},
+
+		// onResult: (e) => {
+		// 	// console.log('got result', e);
+
+		// 	if (e.result.type === 'success') {
+		// 		clearForm();
+		// 		setClearFormOnDestroy(true);
+		// 		const formData = e.result.data?.form?.data;
+		// 		const robotName = formData?.robotName;
+		// 		const link = `/register/success?robotName=${encodeURIComponent(robotName)}`;
+		// 		// console.log('link', link);
+		// 		// console.log('form data', formData);
+		// 		// console.log(e);
+		// 		goto(link);
+		// 	} else {
+		// 		throw redirect(500, '/register/failed');
+		// 	}
+		// },
 		invalidateAll: false,
 		resetForm: false
 	});
 
-	let { form: formData, submitting, enhance } = form;
+	let { form: formData, enhance, delayed, timeout, message } = form;
+	
 	const isRequired = (field: string) => {
 		const requiredFields = [
 			'robotName',
@@ -104,21 +97,21 @@
 	};
 	// Save form to localStorage
 	const saveForm = () => {
-		localStorage.setItem('linefollower-form', JSON.stringify(form.capture()));
+		localStorage.setItem(_form_id, JSON.stringify(form.capture()));
 	};
 
 	// Load form from localStorage
 	const loadForm = () => {
-		const savedForm = localStorage.getItem('linefollower-form');
+		const savedForm = localStorage.getItem(_form_id);
 		if (savedForm) {
 			form.restore(JSON.parse(savedForm));
 		}
-		console.log(savedForm);
-		console.log($formData);
+		// console.log(savedForm);
+		// console.log($formData);
 	};
 	const clearForm = () => {
 		form.reset();
-		localStorage.removeItem('linefollower-form');
+		localStorage.removeItem(_form_id);
 	};
 	onMount(() => {
 		try {
@@ -127,13 +120,16 @@
 	});
 	onDestroy(() => {
 		try {
-			saveForm();
+			if (getClearFormOnDestroy()) {
+				clearForm();
+			} else {
+				saveForm();
+			}
 		} catch (e) {}
 	});
-
 </script>
 
-<form method="POST" class="space-y-8" use:enhance id="profile-form">
+<form method="POST" class="mb-8 space-y-8" use:enhance id="profile-form">
 	<hr class={'h-0.5 rounded-xl  border-0 ' + themeColor} />
 
 	<Form.Field {form} name="robotName">
@@ -372,9 +368,18 @@
 		<Form.FieldErrors />
 	</Form.Field>
 	<div class="flex justify-between">
-		<Form.Button on:click={() =>{ saveForm()}} disabled={$submitting}>Envoyer</Form.Button>
-		<Button variant="ghost" on:click={() => form.reset()}>Effacer le formulaire</Button>
-
+		<Form.Button
+			on:click={() => {
+				saveForm();
+			}}
+			disabled={$delayed}
+		>
+			{#if $delayed}
+				<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
+			{/if}
+			Envoyer</Form.Button
+		>
+		<Button variant="ghost" on:click={clearForm}>Effacer le formulaire</Button>
 	</div>
 </form>
 

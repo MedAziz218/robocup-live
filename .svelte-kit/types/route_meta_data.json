@@ -5,17 +5,25 @@
 		"src/routes/livescores/+page.server.ts"
 	],
 	"/livescores/countdown": [],
-	"/(app)/register": [],
+	"/(app)/register": [
+		"src/routes/(app)/register/+page.ts"
+	],
 	"/(app)/register/all-terrain": [
 		"src/routes/(app)/register/all-terrain/+page.server.ts"
 	],
 	"/(app)/register/autonomous": [
 		"src/routes/(app)/register/autonomous/+page.server.ts"
 	],
+	"/(app)/register/failed": [
+		"src/routes/(app)/register/failed/+page.ts"
+	],
 	"/(app)/register/junior": [
 		"src/routes/(app)/register/junior/+page.server.ts"
 	],
 	"/(app)/register/linefollower": [
 		"src/routes/(app)/register/linefollower/+page.server.ts"
+	],
+	"/(app)/register/success": [
+		"src/routes/(app)/register/success/+page.ts"
 	]
 }

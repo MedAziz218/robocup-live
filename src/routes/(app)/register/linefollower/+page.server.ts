@@ -1,26 +1,29 @@
-import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { type Actions, fail } from '@sveltejs/kit';
-import { lineFollowerFormSchema } from './linefollower-form.svelte';
+import { superValidate } from 'sveltekit-superforms';
+import { lineFollowerFormSchema } from './formSchema';
+import { Linefollower_google_Form_Link } from '$env/static/private';
+
+// types
 import type { PageServerLoad } from './$types.js';
+import { type Actions, fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	return {
-		form: await superValidate(zod(lineFollowerFormSchema))
+		form: await superValidate(zod(lineFollowerFormSchema)),
+		backUrl: '/register'
 	};
 };
 
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(lineFollowerFormSchema));
-		console.log('checking: ', form.data.teamSize);
 
 		if (!form.valid) {
 			return fail(400, {
 				form
 			});
 		}
-		console.log('success: ', form.data.teamSize);
+
 		const {
 			robotName,
 			teamSize,
@@ -37,19 +40,41 @@ export const actions: Actions = {
 			establishmentName,
 			clubName
 		} = form.data;
-		// TODO: import prefilled link from .env
-		const prefilled_link = "import from .env"
-		let res = await fetch(prefilled_link,{
-			method: 'GET'
-		  });
-		console.log("res:\n",res)
-		if (res.status !== 200) {
-			return fail(403, {
-				form
+
+		const emptyString = '<-->';
+		// Replace placeholders enclosed in curly braces with actual data
+		const populatedGoogleFormLink = Linefollower_google_Form_Link.replace('{robotName}', robotName)
+			.replace('{teamSize}', teamSize)
+			.replace('{teamLeaderName}', teamLeaderName)
+			.replace('{teamLeaderPhoneNumber}', teamLeaderPhoneNumber)
+			.replace('{otherPhoneNumber}', otherPhoneNumber)
+			.replace('{teamLeaderEmail}', teamLeaderEmail)
+			.replace('{secondTeamMemberName}', secondTeamMemberName || emptyString)
+			.replace('{secondTeamMemberPhoneNumber}', secondTeamMemberPhoneNumber || emptyString)
+			.replace('{secondTeamMemberEmail}', secondTeamMemberEmail || emptyString)
+			.replace('{thirdTeamMemberName}', thirdTeamMemberName || emptyString)
+			.replace('{thirdTeamMemberPhoneNumber}', thirdTeamMemberPhoneNumber || emptyString)
+			.replace('{thirdTeamMemberEmail}', thirdTeamMemberEmail || emptyString)
+			.replace('{establishmentName}', establishmentName)
+			.replace('{clubName}', clubName);
+		try {
+			let res = await fetch(populatedGoogleFormLink, {
+				method: 'GET'
+			});
+			if (res.status !== 200) {
+				return fail(403, {
+					form,
+					googleFormSuccess: false
+				});
+			}
+
+			await new Promise((resolve) => setTimeout(resolve, 1000));
+			return { form, googleFormSuccess: true };
+		} catch (e) {
+			return fail(500, {
+				form,
+				googleFormSuccess: false
 			});
 		}
-		console.log(`added team: ${robotName}`);
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		return { form, success: true };
 	}
 };

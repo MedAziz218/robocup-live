@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class="mx-auto max-w-2xl rounded-lg border border-gray-700 bg-background p-6 text-foreground shadow-lg"
+	class="mt-16 mx-auto max-w-2xl rounded-lg border border-gray-700 bg-background p-6 text-foreground shadow-lg"
 >
 	<div class="mb-2">
 		<h1 class="text-lg font-medium">Formulaire d'inscription au concours AUTONOME : SKYPIEA</h1>

@@ -26,6 +26,7 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const Linefollower_google_Form_Link: string;
 	export const ALLUSERSPROFILE: string;
 	export const ANDROID_HOME: string;
 	export const APPDATA: string;
@@ -36,7 +37,7 @@ declare module '$env/static/private' {
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DriverData: string;
-	export const EFC_4704: string;
+	export const EFC_3316: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GIT_ASKPASS: string;
@@ -189,6 +190,7 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		Linefollower_google_Form_Link: string;
 		ALLUSERSPROFILE: string;
 		ANDROID_HOME: string;
 		APPDATA: string;
@@ -199,7 +201,7 @@ declare module '$env/dynamic/private' {
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DriverData: string;
-		EFC_4704: string;
+		EFC_3316: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;

@@ -9,6 +9,7 @@
 	} from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
+	import { Home } from 'lucide-svelte';
 
 	// Replace this with your actual event start date and time
 	const eventStartDate = new Date('2024-10-13T09:00:00');
@@ -63,7 +64,9 @@
 
 			<Input type="text" placeholder="Enter your email" class="mt-4 w-full bg-muted" />
 			<Button class="mt-2 w-full" variant="default">Notify Me When Event Starts</Button>
-			<Button class="mt-4 w-full" variant="outline" href="/">Back to Home page</Button>
+			<Button class="mt-4 w-full" variant="outline" href="/">
+				<Home class="mr-2 h-4 w-4" />
+				Back to Home page</Button>
 		</CardContent>
 	</Card>
 </div>

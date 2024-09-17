@@ -1,27 +1,30 @@
 // @ts-nocheck
-import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { type Actions, fail } from '@sveltejs/kit';
-import { lineFollowerFormSchema } from './linefollower-form.svelte';
+import { superValidate } from 'sveltekit-superforms';
+import { lineFollowerFormSchema } from './formSchema';
+import { Linefollower_google_Form_Link } from '$env/static/private';
+
+// types
 import type { PageServerLoad } from './$types.js';
+import { type Actions, fail } from '@sveltejs/kit';
 
 export const load = async () => {
 	return {
-		form: await superValidate(zod(lineFollowerFormSchema))
+		form: await superValidate(zod(lineFollowerFormSchema)),
+		backUrl: '/register'
 	};
 };
 
 export const actions = {
 	default: async (event: import('./$types').RequestEvent) => {
 		const form = await superValidate(event, zod(lineFollowerFormSchema));
-		console.log('checking: ', form.data.teamSize);
 
 		if (!form.valid) {
 			return fail(400, {
 				form
 			});
 		}
-		console.log('success: ', form.data.teamSize);
+
 		const {
 			robotName,
 			teamSize,
@@ -39,20 +42,41 @@ export const actions = {
 			clubName
 		} = form.data;
 
-		const prefilled_link = `https://docs.google.com/forms/d/e/1FAIpQLSdNoX_6BI5DOyyxKM7YVNCPSd61WHw7TxkfqQVMCUTWMwmg_w/formResponse?usp=pp_url&entry.792218821=${robotName}&entry.466685216=${teamSize}&entry.959881297=${teamLeaderName}&entry.1182773133=${teamLeaderPhoneNumber}&entry.1402328127=${otherPhoneNumber}&entry.1733826168=${teamLeaderEmail}&entry.1278355188=${secondTeamMemberName}&entry.342899768=${secondTeamMemberPhoneNumber}&entry.33560155=${secondTeamMemberEmail}&entry.2053663041=${thirdTeamMemberName}&entry.1132700163=${thirdTeamMemberPhoneNumber}&entry.2124270035=${thirdTeamMemberEmail}&entry.828937829=${establishmentName}&entry.1382479939=${clubName}&submit=Submit`
-		//`https://docs.google.com/forms/d/e/1FAIpQLSdNoX_6BI5DOyyxKM7YVNCPSd61WHw7TxkfqQVMCUTWMwmg_w/formResponse?usp=pp_url&entry.792218821=${robotName}&entry.466685216=${teamSize}&entry.959881297=${teamLeaderName}&entry.1182773133=${teamLeaderPhoneNumber}&entry.1402328127=${otherPhoneNumber}&entry.1733826168=${teamLeaderEmail}&entry.1278355188=${secondTeamMemberName}&entry.342899768=${secondTeamMemberPhoneNumber}&entry.33560155=${secondTeamMemberEmail}&entry.2053663041=${thirdTeamMemberName}&entry.1132700163=${thirdTeamMemberPhoneNumber}&entry.2124270035=${thirdTeamMemberEmail}&entry.828937829=${establishmentName}&entry.1382479939=${clubName}&submit=Submit`;
-		let res = await fetch(prefilled_link,{
-			method: 'GET'
-		  });
-		console.log("res:\n",res)
-		if (res.status !== 200) {
-			return fail(403, {
-				form
+		const emptyString = '<-->';
+		// Replace placeholders enclosed in curly braces with actual data
+		const populatedGoogleFormLink = Linefollower_google_Form_Link.replace('{robotName}', robotName)
+			.replace('{teamSize}', teamSize)
+			.replace('{teamLeaderName}', teamLeaderName)
+			.replace('{teamLeaderPhoneNumber}', teamLeaderPhoneNumber)
+			.replace('{otherPhoneNumber}', otherPhoneNumber)
+			.replace('{teamLeaderEmail}', teamLeaderEmail)
+			.replace('{secondTeamMemberName}', secondTeamMemberName || emptyString)
+			.replace('{secondTeamMemberPhoneNumber}', secondTeamMemberPhoneNumber || emptyString)
+			.replace('{secondTeamMemberEmail}', secondTeamMemberEmail || emptyString)
+			.replace('{thirdTeamMemberName}', thirdTeamMemberName || emptyString)
+			.replace('{thirdTeamMemberPhoneNumber}', thirdTeamMemberPhoneNumber || emptyString)
+			.replace('{thirdTeamMemberEmail}', thirdTeamMemberEmail || emptyString)
+			.replace('{establishmentName}', establishmentName)
+			.replace('{clubName}', clubName);
+		try {
+			let res = await fetch(populatedGoogleFormLink, {
+				method: 'GET'
+			});
+			if (res.status !== 200) {
+				return fail(403, {
+					form,
+					googleFormSuccess: false
+				});
+			}
+
+			await new Promise((resolve) => setTimeout(resolve, 1000));
+			return { form, googleFormSuccess: true };
+		} catch (e) {
+			return fail(500, {
+				form,
+				googleFormSuccess: false
 			});
 		}
-		console.log(`added team: ${robotName}`);
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		return { form, success: true };
 	}
 };
 ;null as any as PageServerLoad;;null as any as Actions;
