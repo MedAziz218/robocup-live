@@ -6,6 +6,7 @@ export function load({ url  }) {
 		throw redirect(302, '/register');
 	}
 	return {
+		status,
 		backUrl: '/'
 	};
 }

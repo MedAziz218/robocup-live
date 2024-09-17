@@ -5,7 +5,7 @@
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import { goto } from '$app/navigation';
 
-	export let errorCode: number = 500;
+	export let data;
 	export let errorMessage: string = "We're sorry, but something went wrong on our end.";
 
 	function tryAgainCallback() {
@@ -28,7 +28,7 @@
 		<CardContent>
 			<Alert variant="destructive">
 				<AlertTriangle class="h-4 w-4" />
-				<AlertTitle>Error {errorCode}</AlertTitle>
+				<AlertTitle>Error {data.status}</AlertTitle>
 				<AlertDescription>{errorMessage}</AlertDescription>
 			</Alert>
 			<div class="mt-6 space-y-2">

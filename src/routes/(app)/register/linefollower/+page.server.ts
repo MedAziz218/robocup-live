@@ -71,7 +71,7 @@ export const actions: Actions = {
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 			return { form, googleFormSuccess: true };
 		} catch (e) {
-			return fail(500, {
+			return fail(501, {
 				form,
 				googleFormSuccess: false
 			});
