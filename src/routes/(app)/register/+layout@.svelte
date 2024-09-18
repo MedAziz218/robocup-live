@@ -15,7 +15,10 @@
 		}
 	}
 </script>
-
+<svelte:head>
+	<script src="https://www.google.com/recaptcha/enterprise.js?render=6LfwbkcqAAAAAA23DZKZ8IrmnbGU3qyozB9I63n9"></script>
+	<!-- Your code -->
+  </svelte:head>
 <Toaster richColors />
 <div>
 	<Button variant="ghost" on:click={goBack} class="absolute left-4 top-4 md:left-8 md:top-8">

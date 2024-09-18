@@ -175,7 +175,7 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	
+	export const PUBLIC_recaptcha_api_key: string;
 }
 
 /**
@@ -350,6 +350,7 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
+		PUBLIC_recaptcha_api_key: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }
