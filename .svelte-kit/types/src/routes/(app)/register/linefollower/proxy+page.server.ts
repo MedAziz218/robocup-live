@@ -18,18 +18,18 @@ export const load = async () => {
 
 export const actions = {
 	default: async (event: import('./$types').RequestEvent) => {
+		const data = await event.request.clone().formData();
 		const form = await superValidate(event, zod(FormSchema));
-
+	
 		if (!form.valid) {
 			return fail(400, {
 				form
 			});
 		}
-		const data = await event.request.formData();
 		const token = String(data.get('cf-turnstile-response'));
 
 		const { success, error } = await validateToken(token, PRIVATE_recaptcha_secret_key);
-		if (!success) return fail(403, { form, error: error || 'Invalid CAPTCHA' });
+		if (!success) return fail(402, { form, error: error || 'Invalid CAPTCHA' });
 		const {
 			robotName,
 			teamSize,

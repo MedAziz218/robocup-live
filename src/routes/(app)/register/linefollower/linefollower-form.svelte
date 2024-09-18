@@ -54,7 +54,7 @@
 				const link = `/register/failed?status=${encodeURIComponent(stat)}`;
 				saveForm();
 				goto(link);
-				console.log('faileddddddddddddd')
+				console.log('faileddddddddddddd',result)
 
 			}
 
