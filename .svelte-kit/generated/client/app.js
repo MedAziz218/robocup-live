@@ -22,7 +22,7 @@ export const server_loads = [];
 export const dictionary = {
 		"/(app)": [4,[2]],
 		"/livescores": [~12],
-		"/livescores/countdown": [13],
+		"/livescores/countdown": [~13],
 		"/(app)/register": [5,[3]],
 		"/(app)/register/all-terrain": [~6,[3]],
 		"/(app)/register/autonomous": [~7,[3]],

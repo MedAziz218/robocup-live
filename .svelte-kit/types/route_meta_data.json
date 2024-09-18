@@ -4,7 +4,9 @@
 	"/livescores": [
 		"src/routes/livescores/+page.server.ts"
 	],
-	"/livescores/countdown": [],
+	"/livescores/countdown": [
+		"src/routes/livescores/countdown/+page.server.ts"
+	],
 	"/(app)/register": [
 		"src/routes/(app)/register/+page.ts"
 	],
