@@ -7,6 +7,7 @@
 	import type { ObserverEventDetails } from 'svelte-inview';
 	import { inview } from 'svelte-inview';
 
+	import robocup_flyer from '$lib/imgs/robocup7.0_flyer.webp'
 
 	import HeroVideoDialog from '../magic/HeroVideoDialog/HeroVideoDialog.svelte';
 	export let hero_video_link="https://www.youtube.com/watch?v=SbYXkOAoZpI"
@@ -78,7 +79,7 @@
 			<HeroVideoDialog
 				animationStyle="from-center"
 				videoSrc={hero_video_link}
-				thumbnailSrc="%sveltekit.assets%/robocup7.0_flyer.jpg"
+				thumbnailSrc={robocup_flyer}
 				thumbnailAlt="Hero Video"
 			/>
 		</div>
