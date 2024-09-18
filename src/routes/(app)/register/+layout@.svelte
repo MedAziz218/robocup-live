@@ -15,7 +15,9 @@
 		}
 	}
 </script>
-
+<svelte:head>
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  </svelte:head>
 <Toaster richColors />
 <div>
 	<Button variant="ghost" on:click={goBack} class="absolute left-4 top-4 md:left-8 md:top-8">

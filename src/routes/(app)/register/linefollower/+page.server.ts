@@ -2,7 +2,8 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import { LineFollowerFormSchema as FormSchema } from './formSchema';
 import { Linefollower_google_Form_Link } from '$env/static/private';
-
+import { PRIVATE_recaptcha_secret_key } from '$env/static/private';
+import { validateToken } from '$lib/turnstile';
 // types
 import type { PageServerLoad } from './$types.js';
 import { type Actions, fail } from '@sveltejs/kit';
@@ -23,7 +24,11 @@ export const actions: Actions = {
 				form
 			});
 		}
+		const data = await event.request.formData();
+		const token = String(data.get('cf-turnstile-response'));
 
+		const { success, error } = await validateToken(token, PRIVATE_recaptcha_secret_key);
+		if (!success) return fail(403, { form, error: error || 'Invalid CAPTCHA' });
 		const {
 			robotName,
 			teamSize,
@@ -61,6 +66,7 @@ export const actions: Actions = {
 			let res = await fetch(populatedGoogleFormLink, {
 				method: 'GET'
 			});
+
 			if (res.status !== 200) {
 				return fail(403, {
 					form,
