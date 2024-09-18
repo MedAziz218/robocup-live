@@ -22,13 +22,13 @@ export const actions: Actions = {
 	
 		if (!form.valid) {
 			return fail(400, {
-				form
+				form, errorType: 'form'
 			});
 		}
 		const token = String(data.get('cf-turnstile-response'));
 
 		const { success, error } = await validateToken(token, PRIVATE_recaptcha_secret_key);
-		if (!success) return fail(402, { form, error: error || 'Invalid CAPTCHA' });
+		if (!success) return fail(402, { form, errorType: 'captcha',errorMessage: error || 'Invalid CAPTCHA' });
 		const {
 			robotName,
 			teamSize,
@@ -69,7 +69,7 @@ export const actions: Actions = {
 
 			if (res.status !== 200) {
 				return fail(403, {
-					form,
+					form, errorType:'googleForm',
 					googleFormSuccess: false
 				});
 			}

@@ -18,10 +18,11 @@
 	import Alert from '$lib/components/ui/alert/alert.svelte';
 	import { goto } from '$app/navigation';
 	import { redirect } from '@sveltejs/kit';
-	import { LineFollowerFormSchema as FormSchema} from './formSchema';
-	import type {  LineFollowerFormSchemaType as FormSchemaType } from './formSchema';
+	import { LineFollowerFormSchema as FormSchema } from './formSchema';
+	import type { LineFollowerFormSchemaType as FormSchemaType } from './formSchema';
 	import { page } from '$app/stores';
-	import {Recaptcha } from "$lib/components/custom";
+	import { Recaptcha } from '$lib/components/custom';
+	import { toast } from 'svelte-sonner';
 	export let data: SuperValidated<Infer<FormSchemaType>>;
 	export let themeColor = 'bg-red-500';
 	let clearFormOnDestroy = false;
@@ -31,6 +32,7 @@
 	const getClearFormOnDestroy = () => {
 		return clearFormOnDestroy;
 	};
+	let captchaError = false;
 	const _form_id = 'linefollower-form';
 	const form = superForm(data, {
 		validators: zodClient(FormSchema),
@@ -38,26 +40,28 @@
 		clearOnSubmit: 'errors',
 		applyAction: false,
 		autoFocusOnError: true,
-		onUpdate: ({ form ,result }) => {
-			console.log('type: ',result.type,'status: ',result.status);
-			if (result.type=="success" && result.data.googleFormSuccess) {
+		onUpdate: ({ form, result }) => {
+			console.log('type: ', result.type, 'status: ', result.status);
+			if (result.type == 'success' && result.data.googleFormSuccess) {
 				const robotName = form.data.robotName;
 				const link = `/register/success?robotName=${encodeURIComponent(robotName)}`;
 				setClearFormOnDestroy(true);
 				clearForm();
 				goto(link);
 				console.log('goto link', link);
-			}else if (result.type=="failure" && form.valid && !result.data.googleFormSuccess) {
+			} else if (result.type == 'failure' && result.data.errorType == 'captcha') {
+				toast.dismiss();
+				toast.error("veuillez remplir le captcha avant d'envoyer");
+				captchaError = true;
+			} else if (result.type == 'failure' && form.valid && result.data.errorType == 'googleForm') {
 				// goto('/register/failed');
 				// console.log(result.type)
-				const stat = result.status
+				const stat = result.status;
 				const link = `/register/failed?status=${encodeURIComponent(stat)}`;
 				saveForm();
 				goto(link);
-				console.log('faileddddddddddddd',result)
-
+				console.log('faileddddddddddddd', result);
 			}
-
 		},
 
 		// onResult: (e) => {
@@ -82,7 +86,7 @@
 	});
 
 	let { form: formData, enhance, delayed, timeout, message } = form;
-	
+
 	const isRequired = (field: string) => {
 		const requiredFields = [
 			'robotName',
@@ -368,11 +372,19 @@
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
-	<Recaptcha/>
+	<div id="captcha">
+		<Recaptcha />
+		{#if captchaError}
+			<p class="text-sm font-semibold text-red-600">Erreur CAPTCHA</p>
+			<p class="text-sm text-red-600">Veuillez compléter le CAPTCHA pour continuer. Merci !</p>
+		{/if}
+	</div>
+
 	<div class="flex justify-between">
 		<Form.Button
 			on:click={() => {
 				saveForm();
+				captchaError = false;
 			}}
 			disabled={$delayed}
 		>
