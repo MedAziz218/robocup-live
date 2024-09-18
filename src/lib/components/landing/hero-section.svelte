@@ -78,7 +78,7 @@
 			<HeroVideoDialog
 				animationStyle="from-center"
 				videoSrc={hero_video_link}
-				thumbnailSrc="src/lib/imgs/robocup7.0_flyer.jpg"
+				thumbnailSrc="%sveltekit.assets%/robocup7.0_flyer.jpg"
 				thumbnailAlt="Hero Video"
 			/>
 		</div>
