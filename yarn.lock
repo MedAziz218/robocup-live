@@ -2446,7 +2446,14 @@ svelte-sonner@^0.3.28:
   resolved "https://registry.npmjs.org/svelte-sonner/-/svelte-sonner-0.3.28.tgz"
   integrity sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==
 
-"svelte@^3 || ^4 || ^5.0.0-next.42", "svelte@^3.0.0 || ^4.0.0", "svelte@^3.0.0 || ^4.0.0 || ^5.0.0-next.1", "svelte@^3.19.0 || ^4.0.0", "svelte@^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0", "svelte@^3.37.0 || ^4.0.0 || ^5.0.0-next.191", "svelte@^4.0.0 || ^5.0.0-next.0", "svelte@^4.0.0 || ^5.0.0-next.1", "svelte@^4.0.0 || ^5.0.0-next.118", svelte@^4.2.7, "svelte@>=3 <5", "svelte@>=3.35.0 || ^4.0.0 || ^5.0.0 || ^5.0.0-next.0", "svelte@3.x || 4.x || >=5.0.0-next.51":
+svelte-turnstile@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.npmjs.org/svelte-turnstile/-/svelte-turnstile-0.8.0.tgz"
+  integrity sha512-7sr8NoAW7P9MRjHjCkj22tV/UozPNUlWT9dw1KX/fR+xNSOhP56qSASUUgxLCgPZ0wZSl+I6ZebZ3v47B6/LaA==
+  dependencies:
+    turnstile-types "^1.2.2"
+
+"svelte@^3 || ^4 || ^5.0.0-next.42", "svelte@^3.0.0 || ^4.0.0", "svelte@^3.0.0 || ^4.0.0 || ^5.0.0-next.1", "svelte@^3.19.0 || ^4.0.0", "svelte@^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0", "svelte@^3.37.0 || ^4.0.0 || ^5.0.0-next.191", "svelte@^3.58.0 || ^4.0.0", "svelte@^4.0.0 || ^5.0.0-next.0", "svelte@^4.0.0 || ^5.0.0-next.1", "svelte@^4.0.0 || ^5.0.0-next.118", svelte@^4.2.7, "svelte@>=3 <5", "svelte@>=3.35.0 || ^4.0.0 || ^5.0.0 || ^5.0.0-next.0", "svelte@3.x || 4.x || >=5.0.0-next.51":
   version "4.2.19"
   resolved "https://registry.npmjs.org/svelte/-/svelte-4.2.19.tgz"
   integrity sha512-IY1rnGr6izd10B0A8LqsBfmlT5OILVuZ7XsI0vdGPEvuonFV7NYEUK4dAkm9Zg2q0Um92kYjTpS1CAP3Nh/KWw==
@@ -2629,6 +2636,11 @@ tslib@2.4.0:
   version "2.4.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
+turnstile-types@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/turnstile-types/-/turnstile-types-1.2.2.tgz"
+  integrity sha512-FlsojSOGe7OxdC5UXVXVyNV3zdWTSaC6tG6cLPWeTSkcBuCzPP+0xUwc1l090ISDcfDEt398GLbXopcGZesY/A==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

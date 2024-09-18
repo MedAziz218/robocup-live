@@ -21,7 +21,7 @@
 	import { LineFollowerFormSchema as FormSchema} from './formSchema';
 	import type {  LineFollowerFormSchemaType as FormSchemaType } from './formSchema';
 	import { page } from '$app/stores';
-
+	import {Recaptcha } from "$lib/components/custom";
 	export let data: SuperValidated<Infer<FormSchemaType>>;
 	export let themeColor = 'bg-red-500';
 	let clearFormOnDestroy = false;
@@ -368,6 +368,7 @@
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
+	<Recaptcha/>
 	<div class="flex justify-between">
 		<Form.Button
 			on:click={() => {

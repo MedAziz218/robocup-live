@@ -31,6 +31,7 @@ declare module '$env/static/private' {
 	export const Autonomous_google_Form_Link: string;
 	export const Allterrain_google_Form_Link: string;
 	export const notify_email_google_Form_Link: string;
+	export const PRIVATE_recaptcha_secret_key: string;
 	export const ALLUSERSPROFILE: string;
 	export const ANDROID_HOME: string;
 	export const APPDATA: string;
@@ -102,6 +103,7 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 	export const npm_package_devDependencies_svelte: string;
 	export const npm_package_devDependencies_svelte_check: string;
+	export const npm_package_devDependencies_svelte_turnstile: string;
 	export const npm_package_devDependencies_tailwindcss: string;
 	export const npm_package_devDependencies_typescript: string;
 	export const npm_package_devDependencies_typescript_eslint: string;
@@ -176,7 +178,7 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	export const PUBLIC_recaptcha_api_key: string;
+	export const PUBLIC_recaptcha_site_key: string;
 }
 
 /**
@@ -200,6 +202,7 @@ declare module '$env/dynamic/private' {
 		Autonomous_google_Form_Link: string;
 		Allterrain_google_Form_Link: string;
 		notify_email_google_Form_Link: string;
+		PRIVATE_recaptcha_secret_key: string;
 		ALLUSERSPROFILE: string;
 		ANDROID_HOME: string;
 		APPDATA: string;
@@ -271,6 +274,7 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_prettier_plugin_tailwindcss: string;
 		npm_package_devDependencies_svelte: string;
 		npm_package_devDependencies_svelte_check: string;
+		npm_package_devDependencies_svelte_turnstile: string;
 		npm_package_devDependencies_tailwindcss: string;
 		npm_package_devDependencies_typescript: string;
 		npm_package_devDependencies_typescript_eslint: string;
@@ -352,7 +356,7 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
-		PUBLIC_recaptcha_api_key: string;
+		PUBLIC_recaptcha_site_key: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }

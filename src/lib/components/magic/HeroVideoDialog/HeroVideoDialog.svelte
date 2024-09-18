@@ -2,6 +2,7 @@
   import { writable } from "svelte/store";
   import { AnimatePresence, Motion } from "svelte-motion";
   import { Play, X } from "lucide-svelte";
+
   type AnimationStyle =
     | "from-bottom"
     | "from-center"

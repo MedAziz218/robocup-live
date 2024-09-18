@@ -78,6 +78,7 @@
 				<Input
 					type="email"
 					name="email"
+					required
 					placeholder="Enter your email"
 					class="mt-4 w-full bg-muted"
 					bind:value={emailValue}
