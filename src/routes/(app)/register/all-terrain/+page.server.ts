@@ -2,7 +2,8 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import { AllterrainFormSchema as FormSchema } from './formSchema';
 import { Allterrain_google_Form_Link } from '$env/static/private';
-
+import { PRIVATE_recaptcha_secret_key } from '$env/static/private';
+import { validateToken } from '$lib/turnstile';
 // types
 import type { PageServerLoad } from './$types.js';
 import { type Actions, fail } from '@sveltejs/kit';
@@ -16,6 +17,7 @@ export const load: PageServerLoad = async () => {
 
 export const actions: Actions = {
 	default: async (event) => {
+		const data = await event.request.clone().formData();
 		const form = await superValidate(event, zod(FormSchema));
 
 		if (!form.valid) {
@@ -23,6 +25,10 @@ export const actions: Actions = {
 				form
 			});
 		}
+		const token = String(data.get('cf-turnstile-response'));
+		const { success, error } = await validateToken(token, PRIVATE_recaptcha_secret_key);
+		if (!success) return fail(402, { form, errorType: 'captcha',errorMessage: error || 'Invalid CAPTCHA' });
+
 
 		const {
 			robotName,

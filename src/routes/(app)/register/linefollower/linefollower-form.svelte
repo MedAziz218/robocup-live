@@ -23,6 +23,7 @@
 	import { page } from '$app/stores';
 	import { Recaptcha } from '$lib/components/custom';
 	import { toast } from 'svelte-sonner';
+
 	export let data: SuperValidated<Infer<FormSchemaType>>;
 	export let themeColor = 'bg-red-500';
 	let clearFormOnDestroy = false;
@@ -32,8 +33,8 @@
 	const getClearFormOnDestroy = () => {
 		return clearFormOnDestroy;
 	};
-	let captchaError = false;
 	const _form_id = 'linefollower-form';
+	let captchaError = false;
 	const form = superForm(data, {
 		validators: zodClient(FormSchema),
 		multipleSubmits: 'prevent',
