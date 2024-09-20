@@ -22,7 +22,7 @@
 	import type {  AutonomousFormSchemaType as FormSchemaType } from './formSchema';
 	import { page } from '$app/stores';
 	import { toast } from 'svelte-sonner';
-	import { Recaptcha } from '$lib/components/custom';
+	import { CustomComboBox, Recaptcha } from '$lib/components/custom';
 	
 	export let data: SuperValidated<Infer<FormSchemaType>>;
 	export let themeColor = 'bg-red-500';
@@ -355,11 +355,16 @@
 				Établissement:
 				{#if isRequired('establishmentName')}<span class="ml-2 text-red-500">*</span>{/if}
 			</Form.Label>
-			<Input
+			<CustomComboBox
+				placeholder="nom de l'établissement"
+				bind:inputValue={$formData.establishmentName}
+				{...attrs}
+				/>
+			<!-- <Input
 				placeholder="nom de l'établissement"
 				{...attrs}
 				bind:value={$formData.establishmentName}
-			/>
+			/> -->
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>

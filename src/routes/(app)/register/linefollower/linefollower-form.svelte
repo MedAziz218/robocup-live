@@ -22,6 +22,7 @@
 	import type { LineFollowerFormSchemaType as FormSchemaType } from './formSchema';
 	import { page } from '$app/stores';
 	import { Recaptcha } from '$lib/components/custom';
+	import { CustomComboBox } from '$lib/components/custom';
 	import { toast } from 'svelte-sonner';
 
 	export let data: SuperValidated<Infer<FormSchemaType>>;
@@ -33,6 +34,7 @@
 	const getClearFormOnDestroy = () => {
 		return clearFormOnDestroy;
 	};
+
 	const _form_id = 'linefollower-form';
 	let captchaError = false;
 	const form = superForm(data, {
@@ -353,11 +355,16 @@
 				Établissement:
 				{#if isRequired('establishmentName')}<span class="ml-2 text-red-500">*</span>{/if}
 			</Form.Label>
-			<Input
+			<CustomComboBox
+				placeholder="nom de l'établissement"
+				bind:inputValue={$formData.establishmentName}
+				{...attrs}
+				/>
+			<!-- <Input
 				placeholder="nom de l'établissement"
 				{...attrs}
 				bind:value={$formData.establishmentName}
-			/>
+			/> -->
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
@@ -369,6 +376,8 @@
 				Nom du Club/Association:
 				{#if isRequired('clubName')}<span class="ml-2 text-red-500">*</span>{/if}
 			</Form.Label>
+
+				<!-- options={['op1', 'op2', 'op3', 'yes1', 'yes2', 'yes3']} -->
 			<Input placeholder="nom du club/association" {...attrs} bind:value={$formData.clubName} />
 		</Form.Control>
 		<Form.FieldErrors />

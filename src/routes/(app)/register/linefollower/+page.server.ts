@@ -19,15 +19,16 @@ export const actions: Actions = {
 	default: async (event) => {
 		const data = await event.request.clone().formData();
 		const form = await superValidate(event, zod(FormSchema));
+		console.log("clubName --> '", form.data.clubName,"'")
 
 		if (!form.valid) {
 			return fail(400, {
 				form, errorType: 'form'
 			});
 		}
-		const token = String(data.get('cf-turnstile-response'));
-		const { success, error } = await validateToken(token, PRIVATE_recaptcha_secret_key);
-		if (!success) return fail(402, { form, errorType: 'captcha',errorMessage: error || 'Invalid CAPTCHA' });
+		// const token = String(data.get('cf-turnstile-response'));
+		// const { success, error } = await validateToken(token, PRIVATE_recaptcha_secret_key);
+		// if (!success) return fail(402, { form, errorType: 'captcha',errorMessage: error || 'Invalid CAPTCHA' });
 
 		const {
 			robotName,
@@ -48,20 +49,20 @@ export const actions: Actions = {
 
 		const emptyString = '<-->';
 		// Replace placeholders enclosed in curly braces with actual data
-		const populatedGoogleFormLink = Linefollower_google_Form_Link.replace('{robotName}', robotName)
-			.replace('{teamSize}', teamSize)
-			.replace('{teamLeaderName}', teamLeaderName)
-			.replace('{teamLeaderPhoneNumber}', teamLeaderPhoneNumber)
-			.replace('{otherPhoneNumber}', otherPhoneNumber)
-			.replace('{teamLeaderEmail}', teamLeaderEmail)
-			.replace('{secondTeamMemberName}', secondTeamMemberName || emptyString)
-			.replace('{secondTeamMemberPhoneNumber}', secondTeamMemberPhoneNumber || emptyString)
-			.replace('{secondTeamMemberEmail}', secondTeamMemberEmail || emptyString)
-			.replace('{thirdTeamMemberName}', thirdTeamMemberName || emptyString)
-			.replace('{thirdTeamMemberPhoneNumber}', thirdTeamMemberPhoneNumber || emptyString)
-			.replace('{thirdTeamMemberEmail}', thirdTeamMemberEmail || emptyString)
-			.replace('{establishmentName}', establishmentName)
-			.replace('{clubName}', clubName);
+		const populatedGoogleFormLink = Linefollower_google_Form_Link.replace('{robotName}', encodeURIComponent(robotName))
+			.replace('{teamSize}',  encodeURIComponent(teamSize))
+			.replace('{teamLeaderName}', encodeURIComponent(teamLeaderName))
+			.replace('{teamLeaderPhoneNumber}', encodeURIComponent(teamLeaderPhoneNumber))
+			.replace('{otherPhoneNumber}', encodeURIComponent(otherPhoneNumber))
+			.replace('{teamLeaderEmail}', encodeURIComponent(teamLeaderEmail))
+			.replace('{secondTeamMemberName}', encodeURIComponent(secondTeamMemberName || emptyString))
+			.replace('{secondTeamMemberPhoneNumber}', encodeURIComponent(secondTeamMemberPhoneNumber || emptyString))
+			.replace('{secondTeamMemberEmail}', encodeURIComponent(secondTeamMemberEmail || emptyString))
+			.replace('{thirdTeamMemberName}', encodeURIComponent(thirdTeamMemberName || emptyString))
+			.replace('{thirdTeamMemberPhoneNumber}', encodeURIComponent(thirdTeamMemberPhoneNumber || emptyString))
+			.replace('{thirdTeamMemberEmail}', encodeURIComponent(thirdTeamMemberEmail || emptyString))
+			.replace('{establishmentName}',encodeURIComponent(establishmentName))
+			.replace('{clubName}', encodeURIComponent(clubName));
 		try {
 			let res = await fetch(populatedGoogleFormLink, {
 				method: 'GET'

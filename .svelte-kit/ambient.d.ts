@@ -81,6 +81,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_package_dependencies_bits_ui: string;
 	export const npm_package_dependencies_clsx: string;
+	export const npm_package_dependencies_cmdk_sv: string;
 	export const npm_package_dependencies_formsnap: string;
 	export const npm_package_dependencies_lucide_svelte: string;
 	export const npm_package_dependencies_mode_watcher: string;
@@ -252,6 +253,7 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_package_dependencies_bits_ui: string;
 		npm_package_dependencies_clsx: string;
+		npm_package_dependencies_cmdk_sv: string;
 		npm_package_dependencies_formsnap: string;
 		npm_package_dependencies_lucide_svelte: string;
 		npm_package_dependencies_mode_watcher: string;

@@ -672,7 +672,7 @@ bindings@^1.4.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bits-ui@^0.21.13:
+bits-ui@^0.21.12, bits-ui@^0.21.13:
   version "0.21.13"
   resolved "https://registry.npmjs.org/bits-ui/-/bits-ui-0.21.13.tgz"
   integrity sha512-7nmOh6Ig7ND4DXZHv1FhNsY9yUGrad0+mf3tc4YN//3MgnJT1LnHtk4HZAKgmxCOe7txSX7/39LtYHbkrXokAQ==
@@ -773,6 +773,14 @@ clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
   integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
+
+cmdk-sv@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.npmjs.org/cmdk-sv/-/cmdk-sv-0.0.18.tgz"
+  integrity sha512-istixiQSy9Ez/mQ4VXWB69btqNyDZckbd1XFEwR46Vw+n5zjdmvoWAcOTj0uX3FZXtw9ikwLVmfoW2nwwMClRg==
+  dependencies:
+    bits-ui "^0.21.12"
+    nanoid "^5.0.7"
 
 code-red@^1.0.3:
   version "1.0.4"
@@ -1774,7 +1782,7 @@ nanoid@^3.3.7:
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.7.tgz"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
 
-nanoid@^5.0.4, nanoid@^5.0.5:
+nanoid@^5.0.4, nanoid@^5.0.5, nanoid@^5.0.7:
   version "5.0.7"
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-5.0.7.tgz"
   integrity sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==
